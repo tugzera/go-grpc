@@ -4,7 +4,10 @@ import (
 	"log"
 	"net"
 
+	"github.com/tugzera/go-grpc/pb"
+	"github.com/tugzera/go-grpc/services"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -15,6 +18,9 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
+
+	pb.RegisterUserServiceServer(grpcServer, services.NewUserService())
+	reflection.Register(grpcServer)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Could not host server: %e", err)
