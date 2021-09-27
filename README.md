@@ -1,1 +1,6 @@
-# go-grpc
+# gRPC - Golang
+
+# 1 - compile proto files
+
+protoc --proto_path=proto proto/*.proto --go_out=pb --go-grpc_out=pb
+
